@@ -58,6 +58,10 @@ class _HomePageState extends State<HomePage> {
     ContextModel cm = ContextModel();
     double eval = exp.evaluate(EvaluationType.REAL, cm);
     ans = eval.toString();
+    if (ans[ans.length - 2] == ".") {
+      var str = ans.substring(0, ans.length - 2);
+      ans = str;
+    }
   }
 
   Widget build(BuildContext context) {
@@ -138,6 +142,26 @@ class _HomePageState extends State<HomePage> {
                             btnTap: () {
                               setState(() {
                                 elqalProcess();
+                              });
+                            },
+                          );
+                        } else if (index == btns.length - 2) {
+                          return MyBtn(
+                            color: Colors.blueAccent,
+                            textColor: Colors.white,
+                            btnText: btns[index],
+                            btnTap: () {
+                              setState(() {
+                                var newUserInput = ans;
+                                //userInput = ans[ans.length - 2];
+
+                                if (ans[ans.length - 2] == ".") {
+                                  var str = newUserInput.substring(
+                                      0, newUserInput.length - 2);
+                                  userInput = str;
+                                } else {
+                                  userInput = ans;
+                                }
                               });
                             },
                           );
